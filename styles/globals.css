@@ -85,6 +85,10 @@ a {
  display: inline-block;
  
 }
+.twitter{
+padding-right: 20px;
+
+}
 
 @media only screen and (max-width: 600px) {
   html {
@@ -138,7 +142,6 @@ a {
   }
   .footer {
     position: fixed;
-   padding-top: 8px;
     width: 100%;
     height: 50px;
     background-color: rgb(51, 58, 158);

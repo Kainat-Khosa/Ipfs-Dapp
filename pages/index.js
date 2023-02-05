@@ -1,6 +1,11 @@
 import { ThirdwebProvider, useStorageUpload,MediaRenderer } from "@thirdweb-dev/react"
 import { useCallback, useState } from "react"
 import { useDropzone } from "react-dropzone"
+import {
+  AiFillTwitterCircle,
+  AiFillLinkedin,
+  AiFillYoutube,
+} from "react-icons/ai"
 
 
 export default function Component() {
@@ -21,6 +26,7 @@ export default function Component() {
   return (
 
     <div>
+
     <div {...getRootProps()}>
       <input {...getInputProps()} />
       <button class="btn">
@@ -44,7 +50,7 @@ export default function Component() {
        
 
           <div class="imp">if file does not open remove (:/) after ipfs in browser's address bar <span> &#8594;</span> 'https://gateway.ipfscdn.io/ipfs/QmX....'  </div>
-        <div class="footer">Developed by Mirac.eth</div>
+        <div class="footer"> <a class="twitter" href="https://twitter.com/7310DOTeth?s=20&t=KD8pTRRzL9s7wDdy2b7sHw"> <AiFillTwitterCircle size={35}/></a>Developed by Mirac.eth</div>
     </div>
     
   )
