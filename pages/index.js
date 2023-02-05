@@ -1,52 +1,51 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
-import styles from "../styles/Home.module.css";
+import { ThirdwebProvider, useStorageUpload,MediaRenderer } from "@thirdweb-dev/react"
+import { useCallback, useState } from "react"
+import { useDropzone } from "react-dropzone"
 
-export default function Home() {
+
+export default function Component() {
+  const [uris,setUris] = useState([]);
+  const { mutateAsync: upload } = useStorageUpload();
+  const onDrop = useCallback(
+    async acceptedFiles => {
+      const _uris = await upload({ data: acceptedFiles })
+      setUris(_uris);
+      
+    },
+    [upload]
+  )
+  const { getRootProps, getInputProps } = useDropzone({ onDrop })
+
+  console.log(uris);
+
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://thirdweb.com/">thirdweb</a>!
-        </h1>
 
-        <p className={styles.description}>
-          Get started by configuring your desired network in{" "}
-          <code className={styles.code}>pages/_app.js</code>, then modify the{" "}
-          <code className={styles.code}>pages/index.js</code> file!
-        </p>
-
-        <div className={styles.connect}>
-          <ConnectWallet />
-        </div>
-
-        <div className={styles.grid}>
-          <a href="https://portal.thirdweb.com/" className={styles.card}>
-            <h2>Portal &rarr;</h2>
-            <p>
-              Guides, references and resources that will help you build with
-              thirdweb.
-            </p>
-          </a>
-
-          <a href="https://thirdweb.com/dashboard" className={styles.card}>
-            <h2>Dashboard &rarr;</h2>
-            <p>
-              Deploy, configure and manage your smart contracts from the
-              dashboard.
-            </p>
-          </a>
-
-          <a
-            href="https://portal.thirdweb.com/templates"
-            className={styles.card}
-          >
-            <h2>Templates &rarr;</h2>
-            <p>
-              Discover and clone template projects showcasing thirdweb features.
-            </p>
-          </a>
-        </div>
-      </main>
+    <div>
+    <div {...getRootProps()}>
+      <input {...getInputProps()} />
+      <button class="btn">
+  <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+  <span>Upload to Ipfs</span>
+</button>
+     
     </div>
-  );
+    <div class="para">
+          
+           
+           <h1> IPFS CID : {uris}</h1>
+           <a
+              href={`https://gateway.ipfscdn.io/${uris}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              See current user file
+            </a>
+        </div>
+       
+
+          <div class="imp">if file does not open remove (:/) after ipfs in browser's address bar <span> &#8594;</span> 'https://gateway.ipfscdn.io/ipfs/QmX....'  </div>
+        <div class="footer">Developed by Mirac.eth</div>
+    </div>
+    
+  )
 }

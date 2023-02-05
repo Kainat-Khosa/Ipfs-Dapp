@@ -6,7 +6,17 @@ const activeChainId = ChainId.Mainnet;
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ThirdwebProvider desiredChainId={activeChainId}>
+    <ThirdwebProvider
+      sdkOptions={{
+        gasless: {
+          openzeppelin: {
+            relayerUrl: process.env.NEXT_PUBLIC_OPENZEPPELIN_URL,
+          },
+        },
+      }}
+      desiredChainId={ChainId.Mumbai}
+      >
+    
       <Component {...pageProps} />
     </ThirdwebProvider>
   );
